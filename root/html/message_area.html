@@ -1,0 +1,29 @@
+{{ define "MessageArea" }}
+  <!-- exibe mensagem de erros ou sucessos -->
+  {{ with .Messages }}    
+    {{ with .Errors }}
+      {{ range . }}
+        <div class="alert alert-danger alert-dismissible fade show m-3 shadow mb-5" role="alert">
+          <strong>Ops!</strong> {{ . }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>          
+      {{ end }}
+    {{ end }}
+    {{ with .Success }}
+      {{ range . }}
+        <div class="alert alert-success alert-dismissible fade show m-3 shadow mb-5" role="alert">
+          <strong>Feito!</strong> {{ . }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>          
+      {{ end }}
+    {{ end }}
+    {{ with .Alerts }}
+      {{ range . }}
+        <div class="alert alert-warning alert-dismissible fade show m-3 shadow mb-5" role="alert">
+          <strong>Atenção!</strong> {{ . }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>          
+      {{ end }}
+    {{ end }}
+  {{ end }}    
+{{ end }}

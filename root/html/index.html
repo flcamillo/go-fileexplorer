@@ -1,0 +1,140 @@
+{{ define "Home" }}
+<!DOCTYPE HTML>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <title>{{ .Title }}</title>
+</head>
+
+<body>
+
+  {{ template "NavBar" . }}
+
+  {{ $dir := .Records.Dir }}
+  {{ $download := .Records.Download }}
+
+  <div class="container">
+    
+    {{ template "MessageArea" . }}    
+
+    <h5 class="text-nowrap my-2">Informe o caminho que seja acessar</h5>
+    <div class="d-flex">
+      <form method="get" class="w-100 mx-2">
+        <input class="form-control" type="text" placeholder="Diretório" name="dir" id="dir" value="{{ .Records.Dir }}">
+      </form>
+      <a class="btn btn-outline-secondary btn-sm" href="/?op=up&dir={{ $dir }}" data-toggle="tooltip"
+        data-placement="bottom" title="Voltar">
+        <svg class="bi bi-arrow-90deg-left" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M6.104 2.396a.5.5 0 0 1 0 .708L3.457 5.75l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
+          <path fill-rule="evenodd"
+            d="M2.75 5.75a.5.5 0 0 1 .5-.5h6.5a2.5 2.5 0 0 1 2.5 2.5v5.5a.5.5 0 0 1-1 0v-5.5a1.5 1.5 0 0 0-1.5-1.5h-6.5a.5.5 0 0 1-.5-.5z" />
+        </svg>
+      </a>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"><a href="/?dir={{ $dir }}&o=name&ot={{ .Records.OrderType }}">
+              Arquivo
+              {{ if eq .Records.Order "name" }}
+                {{ if eq .Records.OrderType "z" }}
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sort-alpha-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11A.5.5 0 0 1 4 2z"/>
+                    <path fill-rule="evenodd" d="M6.354 11.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L4 12.793l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M9.664 7l.418-1.371h1.781L12.281 7h1.121l-1.78-5.332h-1.235L8.597 7h1.067zM11 2.687l.652 2.157h-1.351l.652-2.157H11zM9.027 14h3.934v-.867h-2.645v-.055l2.567-3.719v-.691H9.098v.867h2.507v.055l-2.578 3.719V14z"/>
+                  </svg>
+                {{ else }}
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sort-alpha-down-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11A.5.5 0 0 1 4 2z"/>
+                    <path fill-rule="evenodd" d="M6.354 11.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L4 12.793l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M9.027 7h3.934v-.867h-2.645v-.055l2.567-3.719v-.691H9.098v.867h2.507v.055L9.027 6.309V7zm.637 7l.418-1.371h1.781L12.281 14h1.121l-1.78-5.332h-1.235L8.597 14h1.067zM11 9.687l.652 2.157h-1.351l.652-2.156H11z"/>
+                  </svg>
+                {{ end }}
+              {{ end }}
+            </a></th>
+          <th scope="col"><a href="/?dir={{ $dir }}&o=date&ot={{ .Records.OrderType }}">
+              Última Alteração
+              {{ if eq .Records.Order "date" }}
+                {{ if eq .Records.OrderType "z" }}
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sort-alpha-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11A.5.5 0 0 1 4 2z"/>
+                    <path fill-rule="evenodd" d="M6.354 11.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L4 12.793l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M9.664 7l.418-1.371h1.781L12.281 7h1.121l-1.78-5.332h-1.235L8.597 7h1.067zM11 2.687l.652 2.157h-1.351l.652-2.157H11zM9.027 14h3.934v-.867h-2.645v-.055l2.567-3.719v-.691H9.098v.867h2.507v.055l-2.578 3.719V14z"/>
+                  </svg>
+                {{ else }}
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sort-alpha-down-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11A.5.5 0 0 1 4 2z"/>
+                    <path fill-rule="evenodd" d="M6.354 11.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L4 12.793l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M9.027 7h3.934v-.867h-2.645v-.055l2.567-3.719v-.691H9.098v.867h2.507v.055L9.027 6.309V7zm.637 7l.418-1.371h1.781L12.281 14h1.121l-1.78-5.332h-1.235L8.597 14h1.067zM11 9.687l.652 2.157h-1.351l.652-2.156H11z"/>
+                  </svg>
+                {{ end }}
+              {{ end }}
+            </a></th>
+          <th scope="col"><a href="/?dir={{ $dir }}&o=size&ot={{ .Records.OrderType }}">
+              Tamanho
+              {{ if eq .Records.Order "size" }}
+                {{ if eq .Records.OrderType "z" }}
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sort-alpha-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11A.5.5 0 0 1 4 2z"/>
+                    <path fill-rule="evenodd" d="M6.354 11.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L4 12.793l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M9.664 7l.418-1.371h1.781L12.281 7h1.121l-1.78-5.332h-1.235L8.597 7h1.067zM11 2.687l.652 2.157h-1.351l.652-2.157H11zM9.027 14h3.934v-.867h-2.645v-.055l2.567-3.719v-.691H9.098v.867h2.507v.055l-2.578 3.719V14z"/>
+                  </svg>
+                {{ else }}
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sort-alpha-down-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11A.5.5 0 0 1 4 2z"/>
+                    <path fill-rule="evenodd" d="M6.354 11.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L4 12.793l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M9.027 7h3.934v-.867h-2.645v-.055l2.567-3.719v-.691H9.098v.867h2.507v.055L9.027 6.309V7zm.637 7l.418-1.371h1.781L12.281 14h1.121l-1.78-5.332h-1.235L8.597 14h1.067zM11 9.687l.652 2.157h-1.351l.652-2.156H11z"/>
+                  </svg>
+                {{ end }}
+              {{ end }}
+            </a></th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>        
+        {{ range $i, $e := .Records.Files }}
+        <tr>
+          <td>{{ Add $i 1 }}</td>
+          {{ if $e.IsDir }}
+          <td>
+            <a href="/?op=in&folder={{ $e.Name }}&dir={{ $dir }}">{{ $e.Name }}</a>
+          </td>
+          {{ else }}
+          <td>{{ $e.Name }}</td>
+          {{ end }}
+          <td>{{ $e.ModTime.Format "02/01/2006 15:04:05" }}</td>
+          <td>{{ FileSize $e.Size }}</td>
+          <td>
+            {{ if $download }}
+              {{ if not $e.IsDir }}
+              <a href="/?op=download&id={{ $e.Name }}&dir={{ $dir }}">download</a>
+              {{ end }}
+            {{ end }}
+          </td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="/js/jquery-3.6.0.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+{{ end }}
