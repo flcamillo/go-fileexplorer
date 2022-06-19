@@ -6,13 +6,19 @@ import (
 	"os"
 )
 
+// Define um caminho
+type Path struct {
+	Name string `json:"name"`
+	Path string `json:"path"`
+}
+
 // define a configuração
 type Config struct {
-	Address         string   `json:"address"`
-	Port            int      `json:"port"`
-	DownloadEnabled bool     `json:"download_enabled"`
-	AvoidPaths      []string `json:"avoid_paths"`
-	AllowPaths      []string `json:"allow_paths"`
+	Address         string  `json:"address"`
+	Port            int     `json:"port"`
+	DownloadEnabled bool    `json:"download_enabled"`
+	AvoidPaths      []*Path `json:"avoid_paths"`
+	AllowPaths      []*Path `json:"allow_paths"`
 }
 
 // retorna uma nova configuração

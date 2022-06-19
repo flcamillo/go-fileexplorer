@@ -1,3 +1,0 @@
-2022/01/23 02:44:52 Erro no processamento do template, template: message_area.html:25:15: executing "MessageArea" at <.>: range can't iterate over O download dos arquivos não esta habilitado
-2022/01/23 20:10:29 Não foi possível abrir o arquivo de configuração, open D:\Fabio\Go\src\fileexplorer\config.json: O sistema não pode encontrar o arquivo especificado.
-2022/01/23 20:12:30 Não foi possível ler a configuração, EOF

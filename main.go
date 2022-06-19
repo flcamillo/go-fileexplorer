@@ -54,23 +54,23 @@ func main() {
 	config.Save(filepath.Join(applicationPath, configFile))
 	// compila os regexp para os caminhos proibidos
 	for k, v := range config.AvoidPaths {
-		mask := regexp.QuoteMeta(v)
+		mask := regexp.QuoteMeta(v.Path)
 		mask = strings.ReplaceAll(mask, `\*`, ".*")
 		flag := "(?i)"
 		pattern, err := regexp.Compile(fmt.Sprintf("%s%s", flag, mask))
 		if err != nil {
-			log.Printf("Expressão {%d} {%s} de caminho proibido ignorada pois esta inválida, %s", k, v, err)
+			log.Printf("Expressão {%d} {%s} de caminho proibido ignorada pois esta inválida, %s", k, v.Path, err)
 		}
 		avoidedPaths = append(avoidedPaths, pattern)
 	}
 	// compila os regexp para os caminhos permitidos
 	for k, v := range config.AllowPaths {
-		mask := regexp.QuoteMeta(v)
+		mask := regexp.QuoteMeta(v.Path)
 		mask = strings.ReplaceAll(mask, `\*`, ".*")
 		flag := "(?i)"
 		pattern, err := regexp.Compile(fmt.Sprintf("%s%s", flag, mask))
 		if err != nil {
-			log.Printf("Expressão {%d} {%s} de caminho permitido ignorada pois esta inválida, %s", k, v, err)
+			log.Printf("Expressão {%d} {%s} de caminho permitido ignorada pois esta inválida, %s", k, v.Path, err)
 		}
 		allowedPaths = append(allowedPaths, pattern)
 	}
