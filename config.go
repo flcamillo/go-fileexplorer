@@ -48,7 +48,7 @@ func (p *Config) Save(file string) {
 	}
 	defer f.Close()
 	e := json.NewEncoder(f)
-	e.SetIndent(" ", "")
+	e.SetIndent("", "  ")
 	err = e.Encode(p)
 	if err != nil {
 		log.Printf("Não foi possível gravar a configuração, %s", err)
